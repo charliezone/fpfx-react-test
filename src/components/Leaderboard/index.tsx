@@ -1,3 +1,4 @@
+import { DisplayEntries } from './DisplayEntries';
 import Icon from './leaderboard-icon.svg';
 
 export function Leaderboard() {
@@ -6,6 +7,9 @@ export function Leaderboard() {
             <header className="flex gap-2 mb-4">
                 <img src={Icon} alt="Leaderboard icon" /><h2 className="text-parchment font-bold text-lg leading-27">Leaderboard</h2>
             </header>
+            <div>
+                <DisplayEntries/>
+            </div>
         </section>
     );
 }

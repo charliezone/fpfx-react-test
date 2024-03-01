@@ -11,6 +11,7 @@ export default {
         primary: '#012030',
         secondary: '#003A47',
         parchment: '#F2E3D5',
+        cloudy: '#A9A29C',
       },
       padding: {
         '150': '150px'
