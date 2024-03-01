@@ -7,10 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        daintree: '#012030',
+        primary: '#012030',
+        secondary: '#003A47'
       },
       padding: {
-        '150px': '150px'
+        '150': '150px'
+      },
+      borderRadius: {
+        xl: '0.625rem'
+      },
+      screens: {
+        'xl': '1200px',
       }
     },
   },
