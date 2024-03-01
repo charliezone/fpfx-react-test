@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import defaultTheme from 'tailwindcss/defaultTheme';
 export default {
   content: [
     "./index.html",
@@ -8,7 +9,8 @@ export default {
     extend: {
       colors: {
         primary: '#012030',
-        secondary: '#003A47'
+        secondary: '#003A47',
+        parchment: '#F2E3D5',
       },
       padding: {
         '150': '150px'
@@ -18,6 +20,9 @@ export default {
       },
       screens: {
         'xl': '1200px',
+      },
+      fontFamily: {
+        sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans]
       }
     },
   },
