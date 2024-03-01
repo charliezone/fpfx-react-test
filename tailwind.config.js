@@ -12,6 +12,8 @@ export default {
         secondary: '#003A47',
         parchment: '#F2E3D5',
         cloudy: '#A9A29C',
+        cyprus: '#013440',
+        daintree: '#012F39',
       },
       padding: {
         '150': '150px'
