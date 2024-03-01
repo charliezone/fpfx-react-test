@@ -14,6 +14,7 @@ export default {
         cloudy: '#A9A29C',
         cyprus: '#013440',
         daintree: '#012F39',
+        java: '#0FC2C0',
       },
       padding: {
         '150': '150px'

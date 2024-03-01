@@ -1,3 +1,4 @@
+import { CurrentDisplayedEntries } from './CurrentDisplayedEntries';
 import { DisplayEntries } from './DisplayEntries';
 import { LeaderTable } from './LeaderTable';
 import { SearchByUser } from './SearchByUser';
@@ -12,9 +13,12 @@ export function Leaderboard() {
             <div className="flex flex-col">
                 <div className="flex justify-between mb-3">
                     <DisplayEntries/>
-                    <SearchByUser />
+                    <SearchByUser/>
                 </div>
-                <LeaderTable />
+                <div className="mb-4">
+                    <LeaderTable/>
+                </div>
+                <CurrentDisplayedEntries/>
             </div>
         </section>
     );

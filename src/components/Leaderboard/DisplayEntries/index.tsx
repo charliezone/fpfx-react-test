@@ -22,7 +22,7 @@ export function DisplayEntries() {
             <span className="text-cloudy leading-27 font-semibold">Show</span>
             <select 
                 onChange={handleOptionSelected}
-                className="bg-primary rounded-md pl-3 h-10 w-14 text-cloudy custom-select outline-none bg-no-repeat"
+                className="bg-primary rounded-md pl-3 h-10 w-14 text-cloudy text-sm custom-select outline-none bg-no-repeat"
                 style={{backgroundImage: `url(${Icon})`}}    
             >
                 {getOptions()}
