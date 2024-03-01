@@ -1,6 +1,7 @@
 import { CurrentDisplayedEntries } from './CurrentDisplayedEntries';
 import { DisplayEntries } from './DisplayEntries';
 import { LeaderTable } from './LeaderTable';
+import { Paginator } from './Paginator';
 import { SearchByUser } from './SearchByUser';
 import Icon from './leaderboard-icon.svg';
 
@@ -18,7 +19,10 @@ export function Leaderboard() {
                 <div className="mb-4">
                     <LeaderTable/>
                 </div>
-                <CurrentDisplayedEntries/>
+                <div className="flex justify-between">
+                    <CurrentDisplayedEntries/>
+                    <Paginator/>
+                </div>
             </div>
         </section>
     );
