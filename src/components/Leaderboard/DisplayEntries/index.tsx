@@ -1,12 +1,8 @@
-import { ReactElement, useState, ChangeEvent } from "react";
-import Icon from './selector-caret-down.svg';
+import { ReactElement, useState } from "react";
+import { OptionSelector } from "../../common/OptionSelector";
 
 export function DisplayEntries() {
-    const [optionSelected, setOptionSelected] = useState(10);
-
-    function handleOptionSelected(e: ChangeEvent<HTMLSelectElement>) {
-        setOptionSelected(+e.target.value);
-    }
+    const [optionSelected, setOptionSelected] = useState<number | string>(10);
 
     function getOptions() {
         const options: ReactElement[] = [<option value={optionSelected} key={optionSelected}>{optionSelected}</option>];
@@ -18,16 +14,13 @@ export function DisplayEntries() {
     }
 
     return (
-        <div className="flex items-center gap-2">
-            <span className="text-cloudy leading-27 font-semibold">Show</span>
-            <select 
-                onChange={handleOptionSelected}
-                className="bg-primary rounded-md pl-3 h-10 w-14 text-cloudy text-sm custom-select outline-none bg-no-repeat"
-                style={{backgroundImage: `url(${Icon})`}}    
-            >
-                {getOptions()}
-            </select>
-            <span className="text-cloudy leading-27 font-semibold">Entries</span>
-        </div>
+        <OptionSelector
+            labelBefore="Show"
+            labelAfter="Entries"
+            setOptionSelected={setOptionSelected}
+            style={{backgroundPosition: '35px center'}}
+        >
+            {getOptions()}
+        </OptionSelector>
     );
 }
