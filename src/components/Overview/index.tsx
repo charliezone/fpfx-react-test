@@ -1,3 +1,4 @@
+import { Chart } from './Chart';
 import { Indicator } from './Indicator';
 import { SelectUsers } from './SelectUsers';
 import Icon from './chart-icon.svg';
@@ -12,7 +13,7 @@ export function Overview() {
                 <SelectUsers />
             </header>
             <div className="flex justify-between">
-                <div>Chart</div>
+                <div className="grow -ml-3"><Chart/></div>
                 <div className="flex flex-col gap-4">
                     <Indicator
                         title="Profit"
