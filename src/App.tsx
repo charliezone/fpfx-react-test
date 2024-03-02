@@ -1,5 +1,5 @@
-import { Leaderboard } from "./components/Leaderboard";
-import { Overview } from "./components/Overview";
+import { Leaderboard } from "./features/Leaderboard";
+import { Overview } from "./features/Overview";
 
 export default function App() {
   return (
