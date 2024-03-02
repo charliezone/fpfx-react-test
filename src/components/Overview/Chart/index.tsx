@@ -47,8 +47,8 @@ export function Chart() {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="profit" stroke="#FF3737" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="loss" stroke="#0FC2C0" />
+                <Line type="monotone" dataKey="profit" stroke="#0FC2C0" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="loss" stroke="#FF3737" />
             </LineChart>
         </ResponsiveContainer>
     );
