@@ -20,7 +20,7 @@ export function OptionSelector({ labelBefore, labelAfter, className, children, s
             <span className="text-cloudy leading-27 font-semibold">{labelBefore}</span>
             <select 
                 onChange={handleOptionSelected}
-                className={`bg-primary rounded-md pl-3 h-10 ${className ? className : 'w-14'} text-cloudy text-sm custom-select outline-none bg-no-repeat`}
+                className={`bg-primary rounded-md pl-3 h-10 ${className ? className : 'w-14'} text-cloudy text-sm custom-select outline-none bg-no-repeat font-semibold`}
                 style={{...style, backgroundImage: `url(${Icon})`}}    
             >
                 {children}

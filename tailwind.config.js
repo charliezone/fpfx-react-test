@@ -15,6 +15,8 @@ export default {
         cyprus: '#013440',
         daintree: '#012F39',
         java: '#0FC2C0',
+        redOrange: '#FF3737',
+        crusta: '#F6742A',
       },
       padding: {
         '150': '150px'
