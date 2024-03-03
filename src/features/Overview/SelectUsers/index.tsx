@@ -22,13 +22,16 @@ export function SelectUsers() {
     }
     
     return (
-        <OptionSelector 
+        
+        <div>
+            {/* <OptionSelector 
             labelBefore="Select user"
             setOptionSelected={setOptionSelected}
             style={{backgroundPosition: '135px center'}}
             className="w-40"
         >
             {getOptions()}
-        </OptionSelector>
+        </OptionSelector> */}
+        </div>
     );
 }

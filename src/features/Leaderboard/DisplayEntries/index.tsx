@@ -1,14 +1,16 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
+import { selectEntry } from "./displayEntriesSlice";
+import { useAppSelector } from "../../../app/hooks";
 import { OptionSelector } from "../../common/OptionSelector";
 
 export function DisplayEntries() {
-    const [optionSelected, setOptionSelected] = useState<number | string>(10);
+    const optionSel = useAppSelector((state) => state.displayEntries.value);
 
     function getOptions() {
-        const options: ReactElement[] = [<option value={optionSelected} key={optionSelected}>{optionSelected}</option>];
+        const options: ReactElement[] = [<option value={optionSel} key={optionSel}>{optionSel}</option>];
     
         for (let i = 5; i <= 20; i++)
-            optionSelected !== i && options.push(<option value={i} key={i}>{i}</option>);
+            optionSel !== i && options.push(<option value={i} key={i}>{i}</option>);
     
         return options;
     }
@@ -17,7 +19,7 @@ export function DisplayEntries() {
         <OptionSelector
             labelBefore="Show"
             labelAfter="Entries"
-            setOptionSelected={setOptionSelected}
+            action={selectEntry}
             style={{backgroundPosition: '35px center'}}
         >
             {getOptions()}

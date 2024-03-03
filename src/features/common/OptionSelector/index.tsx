@@ -1,4 +1,6 @@
-import { ReactElement, ChangeEvent, Dispatch } from "react";
+import { ReactElement, ChangeEvent } from "react";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { useAppDispatch } from "../../../app/hooks";
 import Icon from './selector-caret-down.svg';
 
 type OptionSelector = {
@@ -6,13 +8,15 @@ type OptionSelector = {
     labelAfter?: string;
     className?: string;
     children: ReactElement[];
-    setOptionSelected: Dispatch<React.SetStateAction<number | string>>;
+    action: ActionCreatorWithPayload<number, "displayEntries/selectEntry">;
     style: Object;
 }
 
-export function OptionSelector({ labelBefore, labelAfter, className, children, setOptionSelected, style }: OptionSelector) {
+export function OptionSelector({ labelBefore, labelAfter, className, children, action, style }: OptionSelector) {
+    const dispatch = useAppDispatch();
+    
     function handleOptionSelected(e: ChangeEvent<HTMLSelectElement>) {
-        setOptionSelected(+e.target.value);
+        dispatch(action(+e.target.value));
     }
 
     return (
