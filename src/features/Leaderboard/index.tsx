@@ -8,7 +8,7 @@ import { SearchByUser } from './SearchByUser';
 import Icon from './leaderboard-icon.svg';
 
 function constructQuery(entries: number) {
-    let query = '';
+    let query = '_page=4&';
 
     query += `_limit=${entries}`;
 
@@ -17,7 +17,7 @@ function constructQuery(entries: number) {
 
 export function Leaderboard() {
     const { displayEntries } = useAppSelector((state) => state);
-    const { data = [], isFetching } = useGetUsersQuery(constructQuery(displayEntries.value));
+    const { data, isFetching } = useGetUsersQuery(constructQuery(displayEntries.value));
 
     console.log('data:', data);
 
@@ -32,7 +32,7 @@ export function Leaderboard() {
                     <SearchByUser/>
                 </div>
                 <div className="mb-4">
-                    <LeaderTable users={data}/>
+                    <LeaderTable users={data?.users ?? []}/>
                 </div>
                 <div className="flex justify-between">
                     <CurrentDisplayedEntries/>
