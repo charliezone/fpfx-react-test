@@ -7,17 +7,18 @@ import { Paginator } from './Paginator';
 import { SearchByUser } from './SearchByUser';
 import Icon from './leaderboard-icon.svg';
 
-function constructQuery(entries: number) {
-    let query = '_page=4&';
+function constructQuery(entries: number, currentPage: number) {
+    let query = '';
 
     query += `_limit=${entries}`;
+    query += `&_page=${currentPage}`;
 
     return query;
 }
 
 export function Leaderboard() {
-    const { displayEntries } = useAppSelector((state) => state);
-    const { data, isFetching } = useGetUsersQuery(constructQuery(displayEntries.value));
+    const { displayEntries, paginator } = useAppSelector((state) => state);
+    const { data, isFetching } = useGetUsersQuery(constructQuery(displayEntries.value, paginator.value));
 
     console.log('data:', data);
 
@@ -35,8 +36,13 @@ export function Leaderboard() {
                     <LeaderTable users={data?.users ?? []}/>
                 </div>
                 <div className="flex justify-between">
-                    <CurrentDisplayedEntries/>
-                    <Paginator/>
+                    <CurrentDisplayedEntries
+                        totalEntries={data?.totalCount ?? 1}
+                    />
+                    <Paginator
+                        links={data?.links ?? []}
+                        totalCount={data?.totalCount ?? 1}
+                    />
                 </div>
             </div>
         </section>

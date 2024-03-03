@@ -14,7 +14,8 @@ export type User = {
 
 type Response = {
     users: User[], 
-    links: string[]
+    links: string[],
+    totalCount: number,
 }
 
 export const apiSlice = createApi({
@@ -31,11 +32,16 @@ export const apiSlice = createApi({
                         const result: Response = {
                             users: await response.json(),
                             links: [],
+                            totalCount: 0,
                         };
                         const linkHeader = response.headers.get('Link');
-                        if (linkHeader) {
+                        if (linkHeader)
                             result.links.push(...linkHeader.split(', '));
-                        }
+
+                        const totalCount = response.headers.get('X-Total-Count');
+                        if(totalCount)
+                            result.totalCount = +totalCount;
+                        
                         return result;
                     }
                 };
