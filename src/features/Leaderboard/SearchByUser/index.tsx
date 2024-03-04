@@ -1,4 +1,5 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useCallback } from 'react';
+import { debounce } from 'lodash';
 import { useAppDispatch } from '../../../app/hooks';
 import { setSearchByUser } from './searchByUserSlice';
 import Icon from './magnifier-icon.svg';
@@ -6,8 +7,12 @@ import Icon from './magnifier-icon.svg';
 export function SearchByUser() {
     const dispatch = useAppDispatch();
 
+    const delayedDispatch = useCallback(debounce((value: string) => {
+        dispatch(setSearchByUser(value));
+    }, 1000), []);
+
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
-        dispatch(setSearchByUser(e.target.value));
+        delayedDispatch(e.target.value);
     }
 
     return (
