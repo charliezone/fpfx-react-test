@@ -4,7 +4,9 @@ type DisplayEntriesState = {
     value: number;
 }
 
-const initialState: DisplayEntriesState = { value: 10 };
+export const DEFAULT_DISPLAY_ENTRIES = 10;
+
+const initialState: DisplayEntriesState = { value: DEFAULT_DISPLAY_ENTRIES };
 
 export const displayEntrieSlice = createSlice({
     name: 'displayEntries',

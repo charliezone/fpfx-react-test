@@ -4,7 +4,9 @@ type PaginatorState = {
     value: number;
 }
 
-const initialState: PaginatorState = { value: 1 };
+export const DEFAULT_CURRENT_PAGE = 1;
+
+const initialState: PaginatorState = { value: DEFAULT_CURRENT_PAGE };
 
 export const paginatorSlice = createSlice({
     name: 'paginator',

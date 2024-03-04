@@ -1,10 +1,15 @@
+import { useEffect } from 'react';
 import { CurrentDisplayedEntries } from './CurrentDisplayedEntries';
 import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch } from '../../app/hooks';
+import { selectPage } from './Paginator/paginatorSlice';
 import { useGetUsersQuery } from './leaderboardApiSlice';
 import { DisplayEntries } from './DisplayEntries';
 import { LeaderTable } from './LeaderTable';
 import { Paginator } from './Paginator';
 import { SearchByUser } from './SearchByUser';
+import { DEFAULT_CURRENT_PAGE } from './Paginator/paginatorSlice';
+import { DEFAULT_DISPLAY_ENTRIES } from './DisplayEntries/displayEntriesSlice';
 import Icon from './leaderboard-icon.svg';
 
 function constructQuery(entries: number, currentPage: number) {
@@ -17,10 +22,13 @@ function constructQuery(entries: number, currentPage: number) {
 }
 
 export function Leaderboard() {
+    const dispatch = useAppDispatch();
     const { displayEntries, paginator } = useAppSelector((state) => state);
     const { data, isFetching } = useGetUsersQuery(constructQuery(displayEntries.value, paginator.value));
 
-    console.log('data:', data);
+    useEffect(() => {
+        dispatch(selectPage(DEFAULT_CURRENT_PAGE))
+    }, [displayEntries.value]);
 
     return (
         <section className="container bg-secondary rounded-xl py-4 px-5">
@@ -37,11 +45,11 @@ export function Leaderboard() {
                 </div>
                 <div className="flex justify-between">
                     <CurrentDisplayedEntries
-                        totalEntries={data?.totalCount ?? 1}
+                        totalEntries={data?.totalCount ?? DEFAULT_DISPLAY_ENTRIES}
                     />
                     <Paginator
                         links={data?.links ?? []}
-                        totalCount={data?.totalCount ?? 1}
+                        totalCount={data?.totalCount ?? DEFAULT_CURRENT_PAGE}
                     />
                 </div>
             </div>
