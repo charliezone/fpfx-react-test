@@ -1,3 +1,4 @@
+import { useAppSelector } from '../../../app/hooks';
 import { User } from '../leaderboardApiSlice';
 import { TableHeadCell } from './TableHeadCell';
 
@@ -6,21 +7,64 @@ type LeaderTableProps = {
 }
 
 export function LeaderTable({users}: LeaderTableProps) {
+    const userList = [...users];
+    const orderByList = useAppSelector((state) => state.tableHeadCell.orderBy);
+    const orderByProfit = orderByList.find((orderBy) => orderBy[0] === 'profit');
+    const orderByLoss = orderByList.find((orderBy) => orderBy[0] === 'loss');
+    const orderByBalance = orderByList.find((orderBy) => orderBy[0] === 'balance');
+
+    if(orderByProfit)
+        userList.sort((a, b) => {
+            const sumA = a.profit.reduce((acc, curr) => acc + curr, 0);
+            const sumB = b.profit.reduce((acc, curr) => acc + curr, 0);
+            
+            if(orderByProfit[1] === 'asc')
+                return sumA - sumB;
+
+            return sumB - sumA;
+        });
+
+    if(orderByLoss)
+        userList.sort((a, b) => {
+            const sumA = a.loss.reduce((acc, curr) => acc + curr, 0);
+            const sumB = b.loss.reduce((acc, curr) => acc + curr, 0);
+            
+            if(orderByLoss[1] === 'asc')
+                return Math.abs(sumA) - Math.abs(sumB);
+
+            return Math.abs(sumB) - Math.abs(sumA);
+        });
+
+    if(orderByBalance)
+        userList.sort((a, b) => {
+            const sumProfitA = a.profit.reduce((acc, curr) => acc + curr, 0);
+            const sumProfitB = b.profit.reduce((acc, curr) => acc + curr, 0);
+            const sumLossA = a.loss.reduce((acc, curr) => acc + curr, 0);
+            const sumLossB = b.loss.reduce((acc, curr) => acc + curr, 0);
+            const balanceA = sumProfitA - Math.abs(sumLossA);
+            const balanceB = sumProfitB - Math.abs(sumLossB);
+            
+            if(orderByBalance[1] === 'asc')
+                return balanceA - balanceB;
+
+            return balanceB - balanceA;
+        });
+
     return (
         <div className="rounded-t-lg overflow-hidden">
                 <table className="table-auto w-full">
                 <thead>
                     <tr className="bg-primary">
-                        <TableHeadCell text="User" />
-                        <TableHeadCell text="Profit" />
-                        <TableHeadCell text="Loss" />
-                        <TableHeadCell text="Balance" />
+                        <TableHeadCell text="user" />
+                        <TableHeadCell text="profit" />
+                        <TableHeadCell text="loss" />
+                        <TableHeadCell text="balance" />
                     </tr>
                 </thead>
                 <tbody>
-                    {users.length > 0 && users.map((user) => {
-                        const profit = user.profit.reduce((prev, curr) => prev += curr, 0);
-                        const loss = user.loss.reduce((prev, curr) => prev += curr, 0);
+                    {userList.length > 0 && userList.map((user) => {
+                        const profit = user.profit.reduce((prev, curr) => prev + curr, 0);
+                        const loss = user.loss.reduce((prev, curr) => prev + curr, 0);
                         const balance = profit - Math.abs(loss);
 
                         return (
