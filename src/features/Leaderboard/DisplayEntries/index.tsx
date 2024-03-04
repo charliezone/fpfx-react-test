@@ -1,9 +1,10 @@
-import { ReactElement } from "react";
+import { ReactElement, ChangeEvent } from "react";
 import { selectEntry } from "./displayEntriesSlice";
-import { useAppSelector } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { OptionSelector } from "../../common/OptionSelector";
 
 export function DisplayEntries() {
+    const dispatch = useAppDispatch();
     const optionSel = useAppSelector((state) => state.displayEntries.value);
 
     function getOptions() {
@@ -15,11 +16,15 @@ export function DisplayEntries() {
         return options;
     }
 
+    function handleOptionSelected(e: ChangeEvent<HTMLSelectElement>) {
+        dispatch(selectEntry(+e.target.value));
+    }
+
     return (
         <OptionSelector
             labelBefore="Show"
             labelAfter="Entries"
-            action={selectEntry}
+            handleOptionSelected={handleOptionSelected}
             style={{backgroundPosition: '35px center'}}
         >
             {getOptions()}

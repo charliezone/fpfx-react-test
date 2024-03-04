@@ -1,37 +1,39 @@
-import { useState, ReactElement } from "react";
+import { ReactElement, ChangeEvent } from "react";
 import { OptionSelector } from "../../common/OptionSelector";
+import { User } from "../../Leaderboard/leaderboardApiSlice";
+import { selectUser } from "./selectUsersSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
-export function SelectUsers() {
-    const [optionSelected, setOptionSelected] = useState<number | string>('Martin Newman');
-    const users: string[] = [
-        'Martin Newman', 
-        'Elise Hebert',
-        'Aston Morra',
-        'Raees Parks',
-        'Beatrix Cook',
-        'Alyssa Vasquez',
-    ];
+type SelectUsersProps = {
+    users: User[];
+}
+
+export function SelectUsers({ users }: SelectUsersProps) {
+    const dispatch = useAppDispatch();
+    const userSelected = useAppSelector((state) => state.selectUsers.value);
+
+    function handleOptionSelected(e: ChangeEvent<HTMLSelectElement>) {
+        dispatch(selectUser(e.target.value));
+    }
 
     function getOptions() {
-        const options: ReactElement[] = [<option value={optionSelected} key={optionSelected}>{optionSelected}</option>];
+        const options: ReactElement[] = [];
     
         for (const user of users)
-            user !== optionSelected && options.push(<option value={user} key={user}>{user}</option>);
+            options.push(<option value={user.id} key={user.id}>{user.name} {user.lastname}</option>);
     
         return options;
     }
     
     return (
-        
-        <div>
-            {/* <OptionSelector 
-            labelBefore="Select user"
-            setOptionSelected={setOptionSelected}
+        <OptionSelector
+            labelBefore="Show"
+            labelAfter="Entries"
+            handleOptionSelected={handleOptionSelected}
             style={{backgroundPosition: '135px center'}}
             className="w-40"
         >
             {getOptions()}
-        </OptionSelector> */}
-        </div>
+        </OptionSelector>
     );
 }

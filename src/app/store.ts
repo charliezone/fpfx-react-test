@@ -5,6 +5,7 @@ import { displayEntrieSlice } from "../features/Leaderboard/DisplayEntries/displ
 import { paginatorSlice } from "../features/Leaderboard/Paginator/paginatorSlice";
 import { searchByUserSlice } from "../features/Leaderboard/SearchByUser/searchByUserSlice";
 import { tableHeadCellSlice } from "../features/Leaderboard/LeaderTable/TableHeadCell/tableHeadCellSlice";
+import { selectUsersSlice } from "../features/Overview/SelectUsers/selectUsersSlice";
 
 const rootReducer = combineSlices(
     apiSlice, 
@@ -12,6 +13,7 @@ const rootReducer = combineSlices(
     paginatorSlice,
     searchByUserSlice,
     tableHeadCellSlice,
+    selectUsersSlice,
 );
 
 export type RootState = ReturnType<typeof rootReducer>;

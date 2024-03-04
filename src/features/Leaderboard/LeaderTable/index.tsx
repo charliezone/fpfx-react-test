@@ -74,9 +74,9 @@ export function LeaderTable({users}: LeaderTableProps) {
                                     ${profit}
                                 </td>
                                 <td className="pl-5 last:pr-5 py-3 font-semibold text-sm text-cloudy">
-                                    ${loss}
+                                    ${Math.abs(loss)}
                                 </td>
-                                <td className={`pl-5 last:pr-5 py-3 font-semibold text-sm ${balance > 0 ? 'text-java' : 'text-redOrange'}`}>${balance}</td>
+                                <td className={`pl-5 last:pr-5 py-3 font-semibold text-sm ${balance > 0 ? 'text-java' : 'text-redOrange'}`}>${Math.abs(balance)}</td>
                             </tr>
                         );
                     })}

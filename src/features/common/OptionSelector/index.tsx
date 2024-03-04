@@ -8,17 +8,11 @@ type OptionSelector = {
     labelAfter?: string;
     className?: string;
     children: ReactElement[];
-    action: ActionCreatorWithPayload<number, "displayEntries/selectEntry">;
+    handleOptionSelected: (e: ChangeEvent<HTMLSelectElement>) => void;
     style: Object;
 }
 
-export function OptionSelector({ labelBefore, labelAfter, className, children, action, style }: OptionSelector) {
-    const dispatch = useAppDispatch();
-    
-    function handleOptionSelected(e: ChangeEvent<HTMLSelectElement>) {
-        dispatch(action(+e.target.value));
-    }
-
+export function OptionSelector({ labelBefore, labelAfter, className, children, handleOptionSelected, style }: OptionSelector) {
     return (
         <div className="flex items-center gap-2">
             <span className="text-cloudy leading-27 font-semibold">{labelBefore}</span>

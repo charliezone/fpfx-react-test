@@ -1,45 +1,19 @@
 import { useEffect } from 'react';
 import { CurrentDisplayedEntries } from './CurrentDisplayedEntries';
-import { useAppSelector } from '../../app/hooks';
 import { useAppDispatch } from '../../app/hooks';
 import { selectPage } from './Paginator/paginatorSlice';
-import { useGetUsersQuery } from './leaderboardApiSlice';
 import { DisplayEntries } from './DisplayEntries';
 import { LeaderTable } from './LeaderTable';
 import { Paginator } from './Paginator';
 import { SearchByUser } from './SearchByUser';
 import { DEFAULT_CURRENT_PAGE } from './Paginator/paginatorSlice';
 import { DEFAULT_DISPLAY_ENTRIES } from './DisplayEntries/displayEntriesSlice';
-import { TableHeadCellState } from './LeaderTable/TableHeadCell/tableHeadCellSlice';
+import { useUsersDataAndState } from '../../app/hooks';
 import Icon from './leaderboard-icon.svg';
-
-function constructQuery(
-    entries: number, 
-    currentPage: number, 
-    searchByUser: string,
-    orderBy: TableHeadCellState['orderBy'][0] | undefined,
-) {
-    let query = '';
-
-    query += `_limit=${entries}`;
-    query += `&_page=${currentPage}`;
-
-    if(searchByUser.length > 0)
-        query += `&q=${searchByUser}`;
-
-    if(orderBy)
-        query += `&_sort=name&_order=${orderBy[1]}`;
-
-    return query;
-}
 
 export function Leaderboard() {
     const dispatch = useAppDispatch();
-    const displayEntries = useAppSelector((state) => state.displayEntries.value);
-    const paginator = useAppSelector((state) => state.paginator.value);
-    const searchByUser = useAppSelector((state) => state.searchByUser.value);
-    const orderBy = useAppSelector((state) => state.tableHeadCell.orderBy.find((item) => item[0] === 'user'));
-    const { data, isFetching } = useGetUsersQuery(constructQuery(displayEntries, paginator, searchByUser, orderBy));
+    const { data, isFetching, displayEntries, searchByUser } = useUsersDataAndState();
 
     useEffect(() => {
         dispatch(selectPage(DEFAULT_CURRENT_PAGE))
