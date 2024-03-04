@@ -33,13 +33,13 @@ export function Overview() {
                     />
                     <Indicator
                         title="Loss"
-                        amount={`$${loss ?? ''}`}
+                        amount={`$${loss ? Math.abs(loss) : ''}`}
                         currencyFontColorClass="text-redOrange"
                     />
                     <Indicator
                         title="Balance"
-                        amount={`$${balance ?? ''}`}
-                        currencyFontColorClass="text-crusta"
+                        amount={`$${balance ? Math.abs(balance) : ''}`}
+                        currencyFontColorClass={balance && balance > 0 ? 'text-crusta' : 'text-redOrange'}
                     />
                 </div>
             </div>
