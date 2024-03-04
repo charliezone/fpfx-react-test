@@ -12,19 +12,22 @@ import { DEFAULT_CURRENT_PAGE } from './Paginator/paginatorSlice';
 import { DEFAULT_DISPLAY_ENTRIES } from './DisplayEntries/displayEntriesSlice';
 import Icon from './leaderboard-icon.svg';
 
-function constructQuery(entries: number, currentPage: number) {
+function constructQuery(entries: number, currentPage: number, searchByUser: string) {
     let query = '';
 
     query += `_limit=${entries}`;
     query += `&_page=${currentPage}`;
+
+    if(searchByUser.length > 0)
+        query += `&q=${searchByUser}`;
 
     return query;
 }
 
 export function Leaderboard() {
     const dispatch = useAppDispatch();
-    const { displayEntries, paginator } = useAppSelector((state) => state);
-    const { data, isFetching } = useGetUsersQuery(constructQuery(displayEntries.value, paginator.value));
+    const { displayEntries, paginator, searchByUser } = useAppSelector((state) => state);
+    const { data, isFetching } = useGetUsersQuery(constructQuery(displayEntries.value, paginator.value, searchByUser.value));
 
     useEffect(() => {
         dispatch(selectPage(DEFAULT_CURRENT_PAGE))

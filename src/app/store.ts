@@ -2,9 +2,15 @@ import { combineSlices, configureStore, ThunkAction, Action } from "@reduxjs/too
 import { apiSlice } from "../features/Leaderboard/leaderboardApiSlice";
 import { displayEntrieSlice } from "../features/Leaderboard/DisplayEntries/displayEntriesSlice";
 import { paginatorSlice } from "../features/Leaderboard/Paginator/paginatorSlice";
+import { searchByUserSlice } from "../features/Leaderboard/SearchByUser/searchByUserSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
-const rootReducer = combineSlices(apiSlice, displayEntrieSlice, paginatorSlice);
+const rootReducer = combineSlices(
+    apiSlice, 
+    displayEntrieSlice, 
+    paginatorSlice,
+    searchByUserSlice,
+);
 
 export type RootState = ReturnType<typeof rootReducer>;
 
