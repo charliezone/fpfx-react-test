@@ -8,10 +8,10 @@ export function DisplayEntries() {
     const optionSel = useAppSelector((state) => state.displayEntries.value);
 
     function getOptions() {
-        const options: ReactElement[] = [<option value={optionSel} key={optionSel}>{optionSel}</option>];
+        const options: ReactElement[] = [];
     
         for (let i = 5; i <= 20; i++)
-            optionSel !== i && options.push(<option value={i} key={i}>{i}</option>);
+            options.push(<option value={i} key={i}>{i}</option>);
     
         return options;
     }
@@ -26,6 +26,7 @@ export function DisplayEntries() {
             labelAfter="Entries"
             handleOptionSelected={handleOptionSelected}
             style={{backgroundPosition: '35px center'}}
+            optionSelected={optionSel.toString()}
         >
             {getOptions()}
         </OptionSelector>

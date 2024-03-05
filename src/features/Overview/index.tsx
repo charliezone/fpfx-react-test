@@ -19,12 +19,12 @@ export function Overview() {
     const shouldDisplay = data && data.users.length > 0 && !isFetching;
 
     return (
-        <section className="container bg-secondary rounded-xl py-4 px-5">
+        <section className="container bg-secondary rounded-xl py-3 px-5">
             <header className="flex flex-col md:flex-row justify-between mb-6">
                 <div className="flex gap-2 mb-4 items-center">
                     <img src={Icon} alt="Leaderboard icon" /><h2 className="text-parchment font-bold text-lg leading-27">Overview</h2>
                 </div>
-                {shouldDisplay && <SelectUsers users={data?.users} />}
+                {shouldDisplay && <SelectUsers users={data?.users} userSelected={overviewInfo} />}
             </header>
             {isFetching && (
                 <div className="flex justify-center min-h-56">
