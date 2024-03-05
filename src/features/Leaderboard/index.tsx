@@ -9,6 +9,7 @@ import { SearchByUser } from './SearchByUser';
 import { DEFAULT_CURRENT_PAGE } from './Paginator/paginatorSlice';
 import { DEFAULT_DISPLAY_ENTRIES } from './DisplayEntries/displayEntriesSlice';
 import { useUsersDataAndState } from '../../app/hooks';
+import { Loading } from '../common/Loading';
 import Icon from './leaderboard-icon.svg';
 
 export function Leaderboard() {
@@ -24,24 +25,31 @@ export function Leaderboard() {
             <header className="flex gap-2 mb-4">
                 <img src={Icon} alt="Leaderboard icon" /><h2 className="text-parchment font-bold text-lg leading-27">Leaderboard</h2>
             </header>
-            <div className="flex flex-col">
-                <div className="flex justify-between mb-3">
-                    <DisplayEntries/>
-                    <SearchByUser/>
+            {isFetching && (
+                <div className="flex justify-center min-h-[585px]">
+                    <Loading />
                 </div>
-                <div className="mb-4">
-                    <LeaderTable users={data?.users ?? []}/>
+            )}
+            {data && data.users.length > 0 && !isFetching && (
+                <div className="flex flex-col">
+                    <div className="flex justify-between mb-3">
+                        <DisplayEntries/>
+                        <SearchByUser/>
+                    </div>
+                    <div className="mb-4">
+                        <LeaderTable users={data?.users ?? []}/>
+                    </div>
+                    <div className="flex justify-between">
+                        <CurrentDisplayedEntries
+                            totalEntries={data?.totalCount ?? DEFAULT_DISPLAY_ENTRIES}
+                        />
+                        <Paginator
+                            links={data?.links ?? []}
+                            totalCount={data?.totalCount ?? DEFAULT_CURRENT_PAGE}
+                        />
+                    </div>
                 </div>
-                <div className="flex justify-between">
-                    <CurrentDisplayedEntries
-                        totalEntries={data?.totalCount ?? DEFAULT_DISPLAY_ENTRIES}
-                    />
-                    <Paginator
-                        links={data?.links ?? []}
-                        totalCount={data?.totalCount ?? DEFAULT_CURRENT_PAGE}
-                    />
-                </div>
-            </div>
+            )}
         </section>
     );
 }
