@@ -27,8 +27,7 @@ export function SelectUsers({ users }: SelectUsersProps) {
     
     return (
         <OptionSelector
-            labelBefore="Show"
-            labelAfter="Entries"
+            labelBefore="Select user"
             handleOptionSelected={handleOptionSelected}
             style={{backgroundPosition: '135px center'}}
             className="w-40"

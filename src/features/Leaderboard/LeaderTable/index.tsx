@@ -51,7 +51,7 @@ export function LeaderTable({users}: LeaderTableProps) {
         });
 
     return (
-        <div className="rounded-t-lg overflow-hidden">
+        <div className="rounded-t-lg overflow-x-auto md:overflow-hidden">
                 <table className="table-auto w-full">
                 <thead>
                     <tr className="bg-primary">

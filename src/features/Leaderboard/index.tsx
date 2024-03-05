@@ -32,17 +32,23 @@ export function Leaderboard() {
             )}
             {data && data.users.length > 0 && !isFetching && (
                 <div className="flex flex-col">
-                    <div className="flex justify-between mb-3">
-                        <DisplayEntries/>
-                        <SearchByUser/>
+                    <div className="flex flex-col md:flex-row justify-between mb-3">
+                        <div className="flex order-2 md:order-1">
+                            <DisplayEntries/>
+                        </div>
+                        <div className="flex order-1 md:order-2 mb-2 md:mb-0 min-h-10">
+                            <SearchByUser/>
+                        </div>
                     </div>
                     <div className="mb-4">
                         <LeaderTable users={data?.users ?? []}/>
                     </div>
-                    <div className="flex justify-between">
-                        <CurrentDisplayedEntries
-                            totalEntries={data?.totalCount ?? DEFAULT_DISPLAY_ENTRIES}
-                        />
+                    <div className="flex flex-col md:flex-row justify-between">
+                        <div className="mb-2 md:mb-0">
+                            <CurrentDisplayedEntries
+                                totalEntries={data?.totalCount ?? DEFAULT_DISPLAY_ENTRIES}
+                            />
+                        </div>
                         <Paginator
                             links={data?.links ?? []}
                             totalCount={data?.totalCount ?? DEFAULT_CURRENT_PAGE}

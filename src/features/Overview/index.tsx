@@ -20,7 +20,7 @@ export function Overview() {
 
     return (
         <section className="container bg-secondary rounded-xl py-4 px-5">
-            <header className="flex justify-between mb-6">
+            <header className="flex flex-col md:flex-row justify-between mb-6">
                 <div className="flex gap-2 mb-4 items-center">
                     <img src={Icon} alt="Leaderboard icon" /><h2 className="text-parchment font-bold text-lg leading-27">Overview</h2>
                 </div>
@@ -32,8 +32,8 @@ export function Overview() {
                 </div>
             )}
             {shouldDisplay && (
-                <div className="flex justify-between">
-                    <div className="grow -ml-3"><Chart user={overviewInfo}/></div>
+                <div className="flex flex-col md:flex-row justify-between">
+                    <div className="grow md:-ml-3 mb-4 md:mb-0"><Chart user={overviewInfo}/></div>
                     <div className="flex flex-col gap-4">
                         <Indicator
                             title="Profit"

@@ -6,7 +6,7 @@ type IndicatorProps = {
 
 export function Indicator({ title, amount, currencyFontColorClass }: IndicatorProps) {
     return (
-        <div className="bg-primary px-3 py-2 w-52 rounded-md flex flex-col">
+        <div className="bg-primary px-3 py-2 md:w-52 rounded-md flex flex-col">
             <span className="text-sm font-semibold text-cloudy">{title}</span>
             <span className={`font-semibold text-xl ${currencyFontColorClass}`}>{amount}</span>
         </div>
