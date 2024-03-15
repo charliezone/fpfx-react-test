@@ -1,4 +1,4 @@
-# FPFX Technologies - React Test
+React Test
 
 ## Task Description
 
